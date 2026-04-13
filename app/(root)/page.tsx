@@ -1,15 +1,11 @@
 import React from 'react'
-import Hello from '../components/hello';
 
-const page = ({children} : {children : React.ReactNode}) => {
+const home = () => {
   return (
-    <div>
-      <h1>Welcome to next.js</h1>
-    {children}
-    <Hello/>
-    </div>
-    
+    <>
+    <h1 className="text-2xl">Home</h1>
+    </>
   )
 }
 
-export default page
+export default home
