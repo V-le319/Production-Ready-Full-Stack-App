@@ -6,7 +6,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+          mainBG: "#F1EFE8", // The soft warm base
+          border: "#D3D1C7",     // Accessible borders
+          muted: "#6B6A63",   // Secondary info (roles, timestamps)
+         pageTint: "#F5F3FF",  // Page tints / Badge fills
+          btn: "#7C3AED", // Buttons / Active states / Primary icons
+          sidebar: "#2E1065", // Sidebar / Navigation / Dark text
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography"),
+  require("tailwindcss-animate"),],
 }
