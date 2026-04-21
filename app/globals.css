@@ -51,7 +51,7 @@
   }
 
   .no-result {
-    @apply text-black-100 text-sm font-normal;
+    @apply text-sm font-normal;
   }
 
   /* profile */
