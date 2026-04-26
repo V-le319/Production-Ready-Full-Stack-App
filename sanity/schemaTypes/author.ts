@@ -1,33 +1,33 @@
 import { UserIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
-export const author = defineType(schemaDefinition: {
+export const author = defineType({
     name: "author",
     title: "Author",
     type: "document",
     icon: UserIcon,
-    field: [
-        defineField(schemaField: {
+    fields: [
+        defineField({
             name: "id",
             type: "number"
         }),
-        defineField(schemaField: {
+        defineField({
             name: "name",
             type: "string"
         }),
-        defineField(schemaField: {
+        defineField({
             name: "username",
             type: "string"
         }),
-        defineField(schemaField: {
+        defineField({
             name: "email",
             type: "string"
         }),
-        defineField(schemaField: {
+        defineField( {
             name: "image",
             type: "url"
         }),
-        defineField(schemaField: {
+        defineField( {
             name: "bio",
             type: "text"
         }),

@@ -8,7 +8,12 @@ const nextConfig = {
                 hostname: "*",
             }
         ]
-    }
+    },
+    
+    experimental: {
+    reactCompiler: false,
+  },
+  transpilePackages: ['sanity'],
 }
 
 module.exports = nextConfig
