@@ -12,7 +12,7 @@ const StartupCard = ( {post} : {post: StartupTypeCard}) => {
     and in the same line you destructer another property with the same name 
     -> YOU HAVE TO RENAME ONE OF THEM. In this case we need to change _id of the author property */}
   
-    const { _createdAt, views, author: { _id: authorId, name}, category, title, _id, description, image} = post;
+    const { _createdAt, views, author: { _id: authorId, name}, category, title, _id, description, immage: image} = post;
   return (
     <li className="startup-card group">
         <div className='flex-between'>

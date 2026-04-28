@@ -2,6 +2,9 @@ import React from 'react'
 import Navbar from "@/components/Navbar"
 import SearchForm from "@/components/SearchForm"
 import StartupCard from '@/components/StartupCard'
+import { client } from '@/sanity/lib/client';
+import { STARTUPS_QUERY } from '@/sanity/lib/queries';
+
 
 
 export default async function home ({searchParams} : {searchParams: Promise<{ query?: string }>} )
@@ -10,6 +13,10 @@ export default async function home ({searchParams} : {searchParams: Promise<{ qu
   /*this is the URL part */
     const query = (await searchParams).query;
 
+    const posts = await client.fetch(STARTUPS_QUERY);
+    console.log(JSON.stringify(posts, null, 2))
+
+    {/*}
     const post = [
       {
         _createdAt: new Date(),
@@ -22,6 +29,7 @@ export default async function home ({searchParams} : {searchParams: Promise<{ qu
         title: "We Robots"
       }
     ]
+    */}
 
   return (
     <>
@@ -36,9 +44,9 @@ export default async function home ({searchParams} : {searchParams: Promise<{ qu
         { query ? `Search results for "${query}"` : "All Startups"}
       </p>
       <ul className="mt-6 card-grid">
-        {post?.length > 0 ? (
-            post.map((post: StartupCardType, index: number) => (
-                <StartupCard key={post?._id} post={post}/>
+        {posts?.length > 0 ? (
+            posts.map((posts: StartupCardType, index: number) => (
+                <StartupCard key={posts?._id} post={posts}/>
             ))
         ) : ( <p className='no-result'>No Startups found</p>)}
       </ul>

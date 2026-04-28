@@ -37,6 +37,10 @@ export const startup = defineType( {
             validation: (Rule) => Rule.min( 1).max(20).required().error("Please enter a category"),
         }),
         defineField({
+            name: "immage",
+            type: "url",
+        }),
+        defineField({
             name: "pitch",
             type: "markdown" /*plugin from Sanity npm install sanity-plugin-markdown */
         }),
