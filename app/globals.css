@@ -19,7 +19,7 @@
 
 @layer utilities {
   .flex-between {
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center ;
   }
 
   .main_container {
