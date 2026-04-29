@@ -4,6 +4,9 @@ import { EyeIcon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from './ui/button'
+import { Author, Startup } from '@/sanity/types'
+
+export type StartupTypeCard = Omit<Startup, "author"> & {author?: Author}
 
 
 const StartupCard = ( {post} : {post: StartupTypeCard}) => {
@@ -12,7 +15,7 @@ const StartupCard = ( {post} : {post: StartupTypeCard}) => {
     and in the same line you destructer another property with the same name 
     -> YOU HAVE TO RENAME ONE OF THEM. In this case we need to change _id of the author property */}
   
-    const { _createdAt, views, author: { _id: authorId, name}, category, title, _id, description, immage: image} = post;
+    const { _createdAt, views, author, category, title, _id, description, immage: image} = post;
   return (
     <li className="startup-card group">
         <div className='flex-between'>
@@ -28,15 +31,15 @@ const StartupCard = ( {post} : {post: StartupTypeCard}) => {
 
         <div className='flex-between mt-5 gap-5'>
           <div className='flex-1'>
-            <Link href={`/user/${authorId}`}>
-            <span className='text-base font-medium line-clamp-1'>{name}</span>
+            <Link href={`/user/${author?._id}`}>
+            <span className='text-base font-medium line-clamp-1'>{author?.name}</span>
             </Link>
             <Link href={`/startups/${_id}`}>
             <span className='text-2xl font-semibold line-clamp-1'>{title}</span>
             </Link>
           </div> 
 
-          <Link href={`/user/${authorId}`}>
+          <Link href={`/user/${author?._id}`}>
           <Image src="https://placehold.co/48x48" alt="placeholder" width={48} height={48}
                  className='rounded-full' />
             </Link>
@@ -48,7 +51,7 @@ const StartupCard = ( {post} : {post: StartupTypeCard}) => {
         </Link>
 
         <div className='flex-between gap-3 mt-5'>
-          <Link href={`/?query=${category.toLowerCase()}`}>
+          <Link href={`/?query=${category?.toLowerCase()}`}>
           <p className='text-base'>{category}</p>
           </Link>
           <Button className='startup-card_btn' asChild>
