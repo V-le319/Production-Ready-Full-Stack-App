@@ -10,9 +10,9 @@ const nextConfig = {
         ]
     },
     
-    experimental: {
-    reactCompiler: false,
-  },
+
+  
+
   transpilePackages: ['sanity'],
 }
 
