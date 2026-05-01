@@ -91,7 +91,7 @@
         "type": "number"
       },
       {
-        "name": "desription",
+        "name": "description",
         "type": "text"
       },
       {

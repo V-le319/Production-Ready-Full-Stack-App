@@ -4,7 +4,7 @@ export const STARTUPS_QUERY = defineQuery
   (`*[_type == "startup" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search] | order(_createdAt desc) {
   _id,
   title,
-  createdAt,
+  _createdAt,
   slug,
   author -> {
     _id,
@@ -22,7 +22,7 @@ export const STARTUPS_QUERY = defineQuery
  {
   _id,
   title,
-  createdAt,
+  _createdAt,
   slug,
   author -> {
     _id,
