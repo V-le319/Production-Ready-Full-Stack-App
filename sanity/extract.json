@@ -94,7 +94,7 @@
         },
         "optional": true
       },
-      "desription": {
+      "description": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

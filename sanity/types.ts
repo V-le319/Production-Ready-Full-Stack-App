@@ -32,7 +32,7 @@ export type Startup = {
   slug?: Slug;
   author?: AuthorReference;
   views?: number;
-  desription?: string;
+  description?: string;
   category?: string;
   immage?: string;
   pitch?: Markdown;
