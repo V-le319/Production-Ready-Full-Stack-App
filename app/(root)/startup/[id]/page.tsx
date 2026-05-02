@@ -3,15 +3,18 @@ import { client } from '@/sanity/lib/client';
 import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
 import Link from 'next/link';
-
-
+import { notFound } from 'next/navigation';
+import markdownit from 'markdown-it'
 import React from 'react'
 
-
+const md = markdownit();
 
 const page = async ({ params } : {params: Promise<{ id: string }>}) => {
     const id = (await params).id;
     const post = await client.fetch(STARTUP_BY_ID_QUERY, {id});
+    if (!post) return notFound();
+
+    const parseContent = md.render(post?.pitch || '')
   return (
     <>
     <section className="main_container !min-h-[250px]">
@@ -29,10 +32,32 @@ const page = async ({ params } : {params: Promise<{ id: string }>}) => {
                       className="flex gap-2 items-center mb-3">
                     <Image src={post.author.image}
                             alt="avatar"
-                            className="w-16 h-16 rounded-full drop-shadow-md"/>
+                            width={64}
+                            height={64}
+                            className="rounded-full drop-shadow-md"/>
+
+                      <div>
+                        <p className="text-xl font-medium">{post.author.name}</p>
+                        <p className="text-base text-gray-600">@{post.author.username}</p>
+                      </div>
                 </Link>
+
+                <p className="category-tag ">{post.category}</p>
               </div>
+
+              <h3 className="text-3xl font-medium">Pitch Details</h3>
+              {parseContent ? (
+                <article
+                  className="prose "
+                  dangerouslySetInnerHTML={{__html: parseContent}}
+                />
+              ) : (
+                <p className="no-result">No details provided</p>
+              )}
             </div>
+            <hr className="divider"/>
+
+            {/* EDITOR SELECTIVE STARTUPS GO HERE*/}
     </section>
     
     </>

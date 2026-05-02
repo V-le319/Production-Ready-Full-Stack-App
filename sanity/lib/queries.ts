@@ -10,6 +10,7 @@ export const STARTUPS_QUERY = defineQuery
     _id,
     name,
     slug,
+    image,
     bio
     },
   views, 
@@ -29,6 +30,7 @@ export const STARTUPS_QUERY = defineQuery
     name,
     username,
     slug,
+    image,
     bio
     },
   views, 
