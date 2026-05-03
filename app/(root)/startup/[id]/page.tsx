@@ -59,7 +59,7 @@ const page = async ({ params } : {params: Promise<{ id: string }>}) => {
             </div>
             <hr className="divider"/>
 
-            {/* EDITOR SELECTIVE STARTUPS GO HERE*/}
+            
     </section>
 
               <Suspense fallback={<Skeleton className="view_skeleton"/>}>
