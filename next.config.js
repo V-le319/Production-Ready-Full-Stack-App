@@ -10,7 +10,9 @@ const nextConfig = {
         ]
     },
     
-
+experimental: {
+  after: true,
+},
   
 
   transpilePackages: ['sanity'],
