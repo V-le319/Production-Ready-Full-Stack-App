@@ -4,6 +4,8 @@ import { useState } from "react"
 import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
 import MDEditor from '@uiw/react-md-editor'
+import { Button } from "./ui/button"
+import { Send } from "lucide-react"
 
 
 
@@ -15,8 +17,9 @@ const StartupForm = () => {
     {/*You could write { title: string, description: string, category: string } manually
      but Record<string, string> is shorter and works for any field name without listing them all upfront. */}
   
-        const [pitch, setPitch] = useState("**Hello World**");
+        const [pitch, setPitch] = useState("");
 
+        const isPending = false;
      return (
     <form className="startup-form"
             action={() => {}}>
@@ -80,23 +83,30 @@ const StartupForm = () => {
           <MDEditor value={pitch}
                     onChange={(value) => setPitch(value as string)}
                     id="pitch"
-                    preview="edite"
+                    preview="edit"
                     height={300}
                     style={{overflow: "hidden", borderRadius: 20}}
                     textareaProps={
                         {placeholder: "Briefly describe your idea and what problem it solves."}
                     }
                     previewOptions={{
-                        
+                        disallowedElements: ["styles"]
                     }}
-                    >
+                    > {/* previewOptions prevents users from injecting CSS via style tags in markdown input */}
 
                     </MDEditor>
             
             {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
         </div>
 
-    </form>
+        <Button type="submit"
+                className="startup-form_btn"
+                disabled={isPending}>
+                    {isPending ? "Submitting..." : "Submit Your Pitch"}
+                  <Send className="size-6 ml-2" />
+        </Button>
+
+    </form> /*TODO ADDING SUBMIT LOGIC*/
   )
 }
 
