@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useActionState, useState } from "react"
 import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
 import MDEditor from '@uiw/react-md-editor'
@@ -19,7 +19,32 @@ const StartupForm = () => {
   
         const [pitch, setPitch] = useState("");
 
-        const isPending = false;
+        const handleFormSubmit = async (preState: any, formData: formData) => {
+                try {
+                    const formValues = {
+                        title: formData.get("title") as string,
+                        description: formData.get("description") as string,
+                        category: formData.get("category") as string,
+                        link: formData.get("link") as string,
+                        pitch,
+                    } 
+                    /*now as we have formValue, we're gonna Validate those value */
+                    await formSchema.parseAsync(formValues);
+                    //const result = await createIdea(prevState, formData, pitch)
+                console.log(result)
+                } catch (error) {
+
+                } finally {
+
+                }
+        };
+
+        const [state, formAction, isPending] = useActionState(
+            handleFormSubmit,
+            {error: "", status: "INITIAL"},
+
+         )
+        
      return (
     <form className="startup-form"
             action={() => {}}>
