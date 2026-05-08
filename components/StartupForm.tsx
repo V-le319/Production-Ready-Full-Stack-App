@@ -3,9 +3,12 @@
 import { useActionState, useState } from "react"
 import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
-import MDEditor from '@uiw/react-md-editor'
+
 import { Button } from "./ui/button"
 import { Send } from "lucide-react"
+import { formSchema } from "@/lib/validation"
+import { z } from "zod"
+import { toast } from "sonner"
 
 
 
@@ -18,9 +21,11 @@ const StartupForm = () => {
      but Record<string, string> is shorter and works for any field name without listing them all upfront. */}
   
         const [pitch, setPitch] = useState("");
+        
 
-        const handleFormSubmit = async (preState: any, formData: formData) => {
-                try {
+        const handleFormSubmit = async (preState: any, formData: FormData) => {
+                console.log("SUBMIT FIRED", Object.fromEntries(formData))
+            try {
                     const formValues = {
                         title: formData.get("title") as string,
                         description: formData.get("description") as string,
@@ -31,9 +36,24 @@ const StartupForm = () => {
                     /*now as we have formValue, we're gonna Validate those value */
                     await formSchema.parseAsync(formValues);
                     //const result = await createIdea(prevState, formData, pitch)
-                console.log(result)
-                } catch (error) {
+                
+                    if(result.status == "SUCCESS") {
+                         toast("SUCCESS", { description: "Your statup pitch has been created successfully!" });
+                    }
 
+                } catch (error) {
+                     console.log(error) 
+                    if (error instanceof z.ZodError) {
+        const fieldErrors = error.flatten().fieldErrors;
+        setErrors(fieldErrors as unknown as Record<string, string>);
+        toast("Error", { description: "Please check your inputs and try again!" });
+
+        return { ...preState, error: "Validation failed", status: "ERROR" };
+    }
+        //sonner Toaster is simplier than old shadcn Toaster with useToast()
+    toast("Error", { description: "Something went wrong" });
+
+    return {...preState, error: "Something went wrong", status: "ERROR" };
                 } finally {
 
                 }
@@ -47,7 +67,7 @@ const StartupForm = () => {
         
      return (
     <form className="startup-form"
-            action={() => {}}>
+            action={formAction}>
         
         <div>
             <label htmlFor="title"
@@ -105,21 +125,17 @@ const StartupForm = () => {
             className="startup-form_label">
                 Pitch
             </label>
-          <MDEditor value={pitch}
-                    onChange={(value) => setPitch(value as string)}
-                    id="pitch"
-                    preview="edit"
-                    height={300}
-                    style={{overflow: "hidden", borderRadius: 20}}
-                    textareaProps={
-                        {placeholder: "Briefly describe your idea and what problem it solves."}
-                    }
-                    previewOptions={{
-                        disallowedElements: ["styles"]
-                    }}
-                    > {/* previewOptions prevents users from injecting CSS via style tags in markdown input */}
-
-                    </MDEditor>
+            
+          <Textarea
+    id="pitch"
+    name="pitch"
+    className="startup-form_textarea"
+    required
+    placeholder="Briefly describe your idea and what problem it solves."
+    value={pitch}
+    onChange={(e) => setPitch(e.target.value)}
+    rows={10}
+/>
             
             {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
         </div>

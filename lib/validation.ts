@@ -1,9 +1,9 @@
 import { z } from "zod"
-import { ur } from "zod/v4/locales"
+
 
 export const formSchema = z.object({
-    titile: z.string().min(3).max(100),
-    description: z.string().min(20).max(500),
+    title: z.string().min(3).max(100),
+    description: z.string().min(10).max(500),
     category: z.string().min(3).max(100),
     link: z.string()
             .url()
