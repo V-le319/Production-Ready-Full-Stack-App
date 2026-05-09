@@ -9,6 +9,8 @@ import { Send } from "lucide-react"
 import { formSchema } from "@/lib/validation"
 import { z } from "zod"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+
 
 
 
@@ -21,6 +23,7 @@ const StartupForm = () => {
      but Record<string, string> is shorter and works for any field name without listing them all upfront. */}
   
         const [pitch, setPitch] = useState("");
+        const router = useRouter()
         
 
         const handleFormSubmit = async (preState: any, formData: FormData) => {
@@ -37,9 +40,12 @@ const StartupForm = () => {
                     await formSchema.parseAsync(formValues);
                     //const result = await createIdea(prevState, formData, pitch)
                 
-                    if(result.status == "SUCCESS") {
-                         toast("SUCCESS", { description: "Your statup pitch has been created successfully!" });
-                    }
+                    // if(result.status == "SUCCESS") {
+                    //      toast("SUCCESS", { description: "Your statup pitch has been created successfully!" });
+                    // }
+
+                    // router.push(`startup/${result.id}`);
+                    // return result;
 
                 } catch (error) {
                      console.log(error) 
