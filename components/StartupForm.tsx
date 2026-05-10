@@ -10,6 +10,7 @@ import { formSchema } from "@/lib/validation"
 import { z } from "zod"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { createPitch } from "@/lib/action"
 
 
 
@@ -26,7 +27,7 @@ const StartupForm = () => {
         const router = useRouter()
         
 
-        const handleFormSubmit = async (preState: any, formData: FormData) => {
+        const handleFormSubmit = async (prevState: any, formData: FormData) => {
                 console.log("SUBMIT FIRED", Object.fromEntries(formData))
             try {
                     const formValues = {
@@ -38,14 +39,14 @@ const StartupForm = () => {
                     } 
                     /*now as we have formValue, we're gonna Validate those value */
                     await formSchema.parseAsync(formValues);
-                    //const result = await createIdea(prevState, formData, pitch)
-                
+                    const result = await createPitch(prevState, formData, pitch)
+              
                     // if(result.status == "SUCCESS") {
                     //      toast("SUCCESS", { description: "Your statup pitch has been created successfully!" });
                     // }
 
-                    // router.push(`startup/${result.id}`);
-                    // return result;
+                     router.push(`startup/${result.id}`);
+                     return result;
 
                 } catch (error) {
                      console.log(error) 
@@ -54,12 +55,12 @@ const StartupForm = () => {
         setErrors(fieldErrors as unknown as Record<string, string>);
         toast("Error", { description: "Please check your inputs and try again!" });
 
-        return { ...preState, error: "Validation failed", status: "ERROR" };
+        return { ...prevState, error: "Validation failed", status: "ERROR" };
     }
         //sonner Toaster is simplier than old shadcn Toaster with useToast()
     toast("Error", { description: "Something went wrong" });
 
-    return {...preState, error: "Something went wrong", status: "ERROR" };
+    return {...prevState, error: "Something went wrong", status: "ERROR" };
                 } finally {
 
                 }
