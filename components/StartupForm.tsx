@@ -45,7 +45,7 @@ const StartupForm = () => {
                     //      toast("SUCCESS", { description: "Your statup pitch has been created successfully!" });
                     // }
 
-                     router.push(`startup/${result.id}`);
+                     router.push(`/startup/${result._id}`);
                      return result;
 
                 } catch (error) {

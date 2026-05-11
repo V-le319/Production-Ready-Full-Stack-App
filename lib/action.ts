@@ -7,7 +7,7 @@ import { writeClient } from "@/sanity/lib/write-client";
 
 export const createPitch = async(state: any, form: FormData, pitch: string) => {
     const session = await auth()
-    if(!session) return parseServerActionResponse({error: "Not signED in", status: "ERROR" });
+    if(!session) return parseServerActionResponse({error: "Not signed in", status: "ERROR" });
 
     const {title, description, category, link} = Object.fromEntries(
         Array.from(form).filter(([key]) => key !== 'pitch')
@@ -15,17 +15,17 @@ export const createPitch = async(state: any, form: FormData, pitch: string) => {
     const slug = slugify(title as string, { lower: true, strict: true})
 
     try {
-        const starup = {
+        const startup = {
             title,
             description,
             category,
-            image: link,
+            immage: link,
             slug: {
                 _type: slug,
                 current: slug
             },
             author: {
-                _type: "preference",
+                _type: "reference",
                 _ref: session?.id,
             },
             pitch
