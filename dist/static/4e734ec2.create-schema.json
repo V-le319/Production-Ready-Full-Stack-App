@@ -150,5 +150,47 @@
     ],
     "name": "startup",
     "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "startup"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to startup"
+          }
+        ],
+        "name": "select",
+        "type": "array"
+      }
+    ],
+    "name": "playlist",
+    "type": "document"
   }
 ]
