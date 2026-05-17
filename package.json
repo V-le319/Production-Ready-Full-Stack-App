@@ -15,7 +15,7 @@
   "overrides": {
      "react": "^19.2.4",
   "react-dom": "^19.2.4",
-  "next": "15.5.15"
+  
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
