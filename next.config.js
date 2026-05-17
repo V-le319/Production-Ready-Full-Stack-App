@@ -16,7 +16,7 @@ experimental: {
 },
   
   serverExternalPackages: ['sanity', '@sanity/vision'],
-  transpilePackages: ['sanity'],
+  //transpilePackages: ['sanity'],
 }
 
 module.exports = nextConfig
