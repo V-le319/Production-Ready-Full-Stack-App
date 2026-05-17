@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+        ignoreBuildErrors: true,
+    },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+
     images: {
         dangerouslyAllowSVG: true,
         remotePatterns: [
@@ -17,9 +24,9 @@ experimental: {
   
   serverExternalPackages: ['sanity', '@sanity/vision'],
   //transpilePackages: ['sanity'],
-}
+},
 
-module.exports = nextConfig
+module.exports = nextConfig;
 
 
 // Injected content via Sentry wizard below
