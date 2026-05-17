@@ -21,10 +21,7 @@ const nextConfig = {
     after: true,
   },
   serverExternalPackages: ['sanity', '@sanity/vision'],
-   webpack: (config) => {
-    config.externals = [...(config.externals || []), 'sanity', '@sanity/vision'];
-    return config;
-  },
+  
 };
 
 module.exports = withSentryConfig(nextConfig, {
