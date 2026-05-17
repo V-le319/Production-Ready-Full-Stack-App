@@ -39,7 +39,7 @@ A full-stack startup pitch platform built with Next.js 15, React 19, and Sanity 
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20
 - A [Sanity](https://sanity.io) account and project
 - A GitHub OAuth app
 
