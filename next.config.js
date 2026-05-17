@@ -12,9 +12,10 @@ const nextConfig = {
     
 experimental: {
   after: true,
+
 },
   
-
+  serverExternalPackages: ['sanity', '@sanity/vision'],
   transpilePackages: ['sanity'],
 }
 
