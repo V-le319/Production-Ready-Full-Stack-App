@@ -20,7 +20,7 @@ const nextConfig = {
   experimental: {
     after: true,
   },
-  serverExternalPackages: ['sanity', '@sanity/vision'],
+  serverExternalPackages: ['sanity', '@sanity/vision', 'next-sanity'],
   
 };
 
