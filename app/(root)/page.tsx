@@ -5,7 +5,7 @@ import StartupCard, { StartupTypeCard } from '@/components/StartupCard'
 
 import { STARTUPS_QUERY } from '@/sanity/lib/queries';
 
-import { sanityFetch, SanityLive } from '@/sanity/lib/live';
+//import { sanityFetch, SanityLive } from '@/sanity/lib/live';
 import { auth } from '@/auth';
 
 
@@ -19,9 +19,9 @@ export default async function home ({searchParams} : {searchParams: Promise<{ qu
     const params = {search: query || null}
 
     const session = await auth()
-
-    /*updating data live with sanity*/
-    const {data: posts} = await sanityFetch({query: STARTUPS_QUERY, params});
+    const posts = await client.fetch(STARTUPS_QUERY, params);
+    // /*updating data live with sanity*/
+    // const {data: posts} = await sanityFetch({query: STARTUPS_QUERY, params});
   
 
   return (
@@ -45,7 +45,7 @@ export default async function home ({searchParams} : {searchParams: Promise<{ qu
       </ul>
     </section>
 
-    <SanityLive></SanityLive>
+  
     
     </>
   )
